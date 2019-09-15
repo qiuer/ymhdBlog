@@ -1,0 +1,40 @@
+---
+layout: default
+title: 文章标签
+css: [common.css,tags.css]
+js: [header.js]
+---
+<div class="main-content">
+	<!-- categories.css -->
+	<div id="listcategories">
+	    <blockquote>标签云</blockquote>
+	    <ul>
+			{% for tag in site.tags %}
+				<li><a href="#{{ tag[0] }}">{{ tag[0] }}</a></li>
+			{% endfor %}
+	    </ul>
+	</div>
+	<!-- main.css -->
+	<div id="articlelist">
+		{% for tag in site.tags %}
+		<div class="year-area">
+			<div class="type-head" name="{{ tag[0] }}" id="{{ tag[0] }}">{{ tag[0] }}</div>
+			<ul>
+				{% for post in tag[1] %}
+					<li>
+						<time>{{ post.date | date: "%Y/%m/%d" }}&nbsp;</time>
+						<a href="{{ site.baseurl }}{{ post.url}}">{{ post.title }}</a>
+						<span>&nbsp;
+						{% for cat in post.categories %}
+							<a href="{{ site.baseurl }}/pages/tags/#{{ cat }}">{{ cat }}</a>
+						{% endfor %}
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+
+
+
